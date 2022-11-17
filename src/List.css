@@ -1,0 +1,49 @@
+.list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 25px;
+  width: 90%;
+}
+
+.address {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 23px;
+  padding: 5px;
+  margin: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+table {
+  width: 100%;
+}
+
+td,
+th {
+  width: 20%;
+  text-align: center;
+}
+
+tr .name,
+.header-address {
+  width: 60%;
+  text-align: center;
+}
+
+.address {
+}
+
+.table-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  font-size: 23px;
+  padding: 5px 15px;
+}
