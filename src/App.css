@@ -1,7 +1,7 @@
 body {
   display: flex;
   justify-content: center;
-  background-color: #0c0c5a;
+  background: linear-gradient(0deg, #020a9b 0%, #5d72ff 100%);
 }
 
 .App {
@@ -25,7 +25,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 85%;
+  width: 90vw;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -33,16 +33,17 @@ body {
   border-radius: 40px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: white;
+  padding-bottom: 70px;
 }
 
 form {
   display: flex;
   justify-content: center;
   width: 80%;
+  padding-top: 60px;
 }
 
 .textbox {
-  border-radius: 10px;
   border: none;
   font-size: 22px;
   padding: 5px 10px;
@@ -50,7 +51,14 @@ form {
 }
 
 input[type="text"] {
-  font-size: 20px;
+  font-size: 22px;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+}
+
+.textbox::placeholder {
+  color: white;
 }
 
 .btn {

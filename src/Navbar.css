@@ -1,0 +1,24 @@
+.navbar {
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 60px;
+}
+
+.navbar .btn {
+  margin-right: 50px;
+  padding: 5px 25px;
+  background-color: transparent;
+  color: white;
+  border: solid 1px white;
+  border-radius: 15px;
+  font-size: 20px;
+}
+
+.navbar .btn:hover {
+  cursor: pointer;
+  background-color: white;
+  color: black;
+}
