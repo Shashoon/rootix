@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.d64199a6.css",
-    "main.js": "/static/js/main.63749676.js",
-    "static/media/apple.png": "/static/media/apple.d49c752d65a8fbd820e8.png",
-    "static/media/waze.png": "/static/media/waze.41629801fb8ab871d30a.png",
-    "static/media/google-maps.png": "/static/media/google-maps.c31a78171b7e5c196cac.png",
-    "static/media/marker.png": "/static/media/marker.abf0fdd58616d801b5c9.png",
-    "index.html": "/index.html",
-    "main.d64199a6.css.map": "/static/css/main.d64199a6.css.map",
-    "main.63749676.js.map": "/static/js/main.63749676.js.map"
+    "main.css": "/rootix/static/css/main.c4200fcb.css",
+    "main.js": "/rootix/static/js/main.4b326964.js",
+    "static/media/apple.png": "/rootix/static/media/apple.d49c752d65a8fbd820e8.png",
+    "static/media/waze.png": "/rootix/static/media/waze.41629801fb8ab871d30a.png",
+    "static/media/google-maps.png": "/rootix/static/media/google-maps.c31a78171b7e5c196cac.png",
+    "static/media/marker.png": "/rootix/static/media/marker.abf0fdd58616d801b5c9.png",
+    "index.html": "/rootix/index.html",
+    "main.c4200fcb.css.map": "/rootix/static/css/main.c4200fcb.css.map",
+    "main.4b326964.js.map": "/rootix/static/js/main.4b326964.js.map"
   },
   "entrypoints": [
-    "static/css/main.d64199a6.css",
-    "static/js/main.63749676.js"
+    "static/css/main.c4200fcb.css",
+    "static/js/main.4b326964.js"
   ]
 }
