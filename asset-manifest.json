@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d64199a6.css",
+    "main.js": "/static/js/main.59dbb2ec.js",
+    "static/media/apple.png": "/static/media/apple.d49c752d65a8fbd820e8.png",
+    "static/media/waze.png": "/static/media/waze.41629801fb8ab871d30a.png",
+    "static/media/google-maps.png": "/static/media/google-maps.c31a78171b7e5c196cac.png",
+    "static/media/marker.png": "/static/media/marker.abf0fdd58616d801b5c9.png",
+    "index.html": "/index.html",
+    "main.d64199a6.css.map": "/static/css/main.d64199a6.css.map",
+    "main.59dbb2ec.js.map": "/static/js/main.59dbb2ec.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d64199a6.css",
+    "static/js/main.59dbb2ec.js"
+  ]
+}
