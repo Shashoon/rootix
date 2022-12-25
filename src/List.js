@@ -37,6 +37,7 @@ const List = ({ addresses, handleVisitedAddress }) => {
                                 <a href={'http://maps.apple.com/?ll=' + curr.latLng.lat + ',' + curr.latLng.lng}>
                                     <img className='logo' src={require('./Images/apple.png')} />
                                 </a>
+                                <button className='delete' onClick={''}>X</button>
                             </div>
                         </div>
                     );
