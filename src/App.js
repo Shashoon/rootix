@@ -67,11 +67,12 @@ const App = () => {
   }, [longitude, latitude]);
 
   useEffect(() => {
-    if (destinations)
+    if (destinations.length >= 1)
       recalculateRoutes();
   }, [destinations])
 
   const recalculateRoutes = () => {
+    console.log('try')
     sortAddresses().then((res) => {
 
       setAddresses(res);
@@ -91,8 +92,6 @@ const App = () => {
       })
     })
   }
-
-
 
   const addDest = async (event) => {
     event.preventDefault();
@@ -124,8 +123,8 @@ const App = () => {
         data: geoJson
       },
       paint: {
-        'line-color': 'blue',
-        'line-width': 4
+        'line-color': 'dodgerblue',
+        'line-width': 5
       }
     })
   }
@@ -167,13 +166,14 @@ const App = () => {
             return {
               name: destinations[index].name,
               latLng: destinations[index].latLng,
-              drivingtime: result.response.routeSummary.travelTimeInSeconds
+              drivingTime: result.response.routeSummary.travelTimeInSeconds,
+              isVisited: false
             }
           })
 
 
           resultsArray.sort((a, b) => {
-            return a.drivingtime - b.drivingtime;
+            return a.drivingTime - b.drivingTime;
           })
 
           const sortedLocations = resultsArray.map((result) => {
@@ -186,6 +186,26 @@ const App = () => {
     })
   }
 
+  const handleVisitedAddress = (index) => {
+    const temp = [...addresses];
+
+    temp[index].isVisited = !temp[index].isVisited;
+
+    if (temp[index].isVisited) {
+      temp.push(temp.splice(index, 1)[0]);
+    } else {
+      temp.sort((a, b) => {
+        return a.drivingTime - b.drivingTime
+      })
+
+      temp.map((curr, _index) => {
+        if (curr.isVisited)
+          temp.push(temp.splice(_index, 1)[0])
+      })
+    }
+
+    setAddresses(temp)
+  }
 
   return (
     <>
@@ -197,11 +217,11 @@ const App = () => {
             <div className='main'>
               <h1>Where to ?</h1>
               <form onSubmit={e => addDest(e)}>
-                <input className='textbox' type='text' placeholder='Enter address' />
-                <input className='btn' type='submit' placeholder='submit' />
+                <input className='textbox' type='text' />
+                <input className='btn' type='submit' value={'Search'} />
               </form>
               {
-                addresses && <List addresses={addresses} />
+                addresses && <List addresses={addresses} handleVisitedAddress={handleVisitedAddress} />
               }
             </div>
           </div>

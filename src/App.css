@@ -57,6 +57,10 @@ input[type="text"] {
   color: white;
 }
 
+input:focus {
+  outline: none;
+}
+
 .textbox::placeholder {
   color: white;
 }
@@ -89,8 +93,9 @@ input[type="text"] {
 }
 
 .marker-delivery {
-  width: 25px;
-  height: 25px;
+  width: 45px;
+  height: 45px;
   border-radius: 15px;
-  background-color: aqua;
+  background-image: url("./Images/marker.png");
+  background-size: cover;
 }
