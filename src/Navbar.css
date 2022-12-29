@@ -1,20 +1,23 @@
 .navbar {
-  height: 120px;
+  height: 5%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: white;
-  font-size: 60px;
+  font-size: 2em;
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background: rgb(0 0 0 / 77%);
 }
 
 .navbar .btn {
-  margin-right: 50px;
-  padding: 5px 25px;
+  width: 15%;
   background-color: transparent;
   color: white;
   border: solid 1px white;
   border-radius: 15px;
-  font-size: 20px;
 }
 
 .navbar .btn:hover {

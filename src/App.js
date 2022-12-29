@@ -6,6 +6,7 @@ import "@tomtom-international/web-sdk-maps/dist/maps.css";
 import List from "./List";
 import Map from "./Map";
 import Navbar from "./Navbar";
+import Search from "./Search";
 
 const App = () => {
   const [map, setMap] = useState({});
@@ -20,6 +21,11 @@ const App = () => {
 
   /// Set map and handle map dragging
   useEffect(() => {
+    const currentLocation = navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    })
+
     const map = tt.map({
       key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
       container: "mapElement",
@@ -30,6 +36,7 @@ const App = () => {
       },
       zoom: 14,
     });
+
 
     setMap(map);
 
@@ -78,7 +85,10 @@ const App = () => {
         return curr.latLng;
       });
 
-      locations.unshift(origin);
+      locations.unshift({
+        lng: longitude,
+        lat: latitude
+      });
 
       ttapi.services.calculateRoute({
         key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
@@ -92,7 +102,6 @@ const App = () => {
 
   const addDest = async (event) => {
     event.preventDefault();
-    document.getElementById('textbox').placeholder = '';
 
     let inputAddress = event.target[0].value;
     let call = await fetch(
@@ -204,14 +213,14 @@ const App = () => {
     setAddresses(tempAddresses);
 
     if (tempDest.length === 0) {
-      removeMarker(latLng)
+      removeMarker(latLng);
     }
 
   };
 
   const removeMarker = (latLng) => {
     const element = document.getElementById(latLng.lat + ',' + latLng.lng);
-    element.remove();
+    element?.remove();
 
     if (map.getLayer("route")) {
       map.removeLayer("route");
@@ -245,19 +254,19 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
       {map && (
         <div className="App">
           <Map />
+          <Navbar />
           <div className="background">
             <div className="main">
-              <h1>Where to ?</h1>
-              <form onSubmit={e => addDest(e)}>
-                <input className='textbox' type='text' />
-                <input className='btn' type='submit' value={'Search'} />
-              </form>
+              
+              <Search addDest={addDest} />
               {
-                addresses && <List addresses={addresses} handleVisitedAddress={handleVisitedAddress} />
+                addresses &&
+                 <List addresses={addresses}
+                 handleVisitedAddress={handleVisitedAddress} 
+                 removeAddress={removeAddress}/>
               }
             </div>
           </div>

@@ -29,9 +29,9 @@ const Map = () => {
     }, []);
 
     return (
-        <div className="map-wrapper">
+        <>
             {map && <div id="mapElement" className="map" />}
-        </div>
+        </>
     );
 };
 
