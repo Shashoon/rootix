@@ -65,12 +65,12 @@ const App = () => {
   }, [longitude, latitude]);
 
   useEffect(() => {
-    if (destinations.length > 0)
-     recalculateRoutes();
-  }, [destinations]);
+    if (destinations.length >= 1)
+      recalculateRoutes();
+  }, [destinations])
 
   const recalculateRoutes = () => {
-    console.log('recalculate')
+    console.log('try')
     sortAddresses().then((res) => {
       setAddresses(res);
 
@@ -80,17 +80,15 @@ const App = () => {
 
       locations.unshift(origin);
 
-      ttapi.services
-        .calculateRoute({
-          key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
-          locations: locations,
-        })
-        .then((routeData) => {
-          const geoJson = routeData.toGeoJson();
-          drawRoute(geoJson, map);
-        });
-    });
-  };
+      ttapi.services.calculateRoute({
+        key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
+        locations: locations
+      }).then((routeData) => {
+        const geoJson = routeData.toGeoJson();
+        drawRoute(geoJson, map)
+      })
+    })
+  }
 
   const addDest = async (event) => {
     event.preventDefault();
@@ -127,11 +125,11 @@ const App = () => {
         data: geoJson,
       },
       paint: {
-        "line-color": "blue",
-        "line-width": 4,
-      },
-    });
-  };
+        'line-color': 'dodgerblue',
+        'line-width': 5
+      }
+    })
+  }
 
   const convertToPoints = (lngLat) => {
     return {
@@ -166,19 +164,22 @@ const App = () => {
     };
 
     return new Promise((resolve, reject) => {
-      ttapi.services.matrixRouting(callParameters).then((matrixAPIResults) => {
-        const results = matrixAPIResults.matrix[0];
-        const resultsArray = results.map((result, index) => {
-          return {
-            name: destinations[index].name,
-            latLng: destinations[index].latLng,
-            drivingtime: result.response.routeSummary.travelTimeInSeconds,
-          };
-        });
+      ttapi.services.matrixRouting(callParameters)
+        .then((matrixAPIResults) => {
+          const results = matrixAPIResults.matrix[0];
+          const resultsArray = results.map((result, index) => {
+            return {
+              name: destinations[index].name,
+              latLng: destinations[index].latLng,
+              drivingTime: result.response.routeSummary.travelTimeInSeconds,
+              isVisited: false
+            }
+          })
 
-        resultsArray.sort((a, b) => {
-          return a.drivingtime - b.drivingtime;
-        });
+
+          resultsArray.sort((a, b) => {
+            return a.drivingTime - b.drivingTime;
+          })
 
         const sortedLocations = resultsArray.map((result) => {
           return result.location;
@@ -219,6 +220,29 @@ const App = () => {
 
   }
 
+  const handleVisitedAddress = (index) => {
+    const temp = [...addresses];
+
+    temp[index].isVisited = !temp[index].isVisited;
+
+    if (temp[index].isVisited) {
+      temp.push(temp.splice(index, 1)[0]);
+    } else {
+      temp.sort((a, b) => {
+        return a.drivingTime - b.drivingTime
+      })
+
+      temp.map((curr, _index) => {
+        if (curr.isVisited)
+          temp.push(temp.splice(_index, 1)[0])
+      })
+    }
+
+    setAddresses(temp)
+  }
+
+
+
   return (
     <>
       <Navbar />
@@ -228,16 +252,13 @@ const App = () => {
           <div className="background">
             <div className="main">
               <h1>Where to ?</h1>
-              <form onSubmit={(e) => addDest(e)}>
-                <input
-                  className="textbox"
-                  id="textbox"
-                  type="text"
-                  placeholder="Enter address"
-                />
-                <button className="btn" type="submit" >Submit</button>
+              <form onSubmit={e => addDest(e)}>
+                <input className='textbox' type='text' />
+                <input className='btn' type='submit' value={'Search'} />
               </form>
-              {addresses && <List addresses={addresses} removeAddress={removeAddress}/>}
+              {
+                addresses && <List addresses={addresses} handleVisitedAddress={handleVisitedAddress} />
+              }
             </div>
           </div>
         </div>

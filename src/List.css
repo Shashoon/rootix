@@ -33,6 +33,11 @@
   border: 2px solid rgba(255, 255, 255, 0.18);
 }
 
+.time {
+  font-size: 85%;
+  color: #cecece;
+}
+
 .navigate {
   display: flex;
   justify-content: space-evenly;

@@ -1,7 +1,9 @@
+import { render } from '@testing-library/react';
+import { useEffect, useState } from 'react';
 import './List.css';
 
 
-const List = ({ addresses, removeAddress }) => {
+const List = ({ addresses, handleVisitedAddress }) => {
 
     return (
         <div className="list">
@@ -10,16 +12,20 @@ const List = ({ addresses, removeAddress }) => {
                 <div>Address</div>
                 <div>Navigate</div>
             </div>
-            <div className=''>
-                {addresses.map((curr, _index) => {
+            {
+                addresses.map((curr, _index) => {
                     return (
-                        <div key={_index} className="address">
-                            <input type="checkbox" className='checkbox' />
+                        <div key={_index} className="address" id={_index}>
+                            <input type="checkbox"
+                                className='checkbox'
+                                checked={curr.isVisited}
+                                onChange={() => handleVisitedAddress(_index)} />
                             <div className="index">
                                 {_index + 1}
                             </div>
                             <div className="name">
                                 {curr.name}
+                                <a className='time'>{' (' + Math.floor(curr.drivingTime / 60) + ' min)'}</a>
                             </div>
                             <div className="navigate">
                                 <a target='_blank' href={'https://www.waze.com/live-map/directions?navigate=yes&to=ll.' + curr.latLng.lat + '%2C' + curr.latLng.lng}>
@@ -38,7 +44,6 @@ const List = ({ addresses, removeAddress }) => {
                         </div>
                     );
                 })}
-            </div>
         </div>
     )
 }
