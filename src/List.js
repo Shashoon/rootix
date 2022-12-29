@@ -1,7 +1,7 @@
 import './List.css';
 
 
-const List = ({ addresses }) => {
+const List = ({ addresses, removeAddress }) => {
 
     return (
         <div className="list">
@@ -22,14 +22,17 @@ const List = ({ addresses }) => {
                                 {curr.name}
                             </div>
                             <div className="navigate">
-                                <a href={'https://www.waze.com/live-map/directions?navigate=yes&to=ll.' + curr.latLng.lat + '%2C' + curr.latLng.lng}>
+                                <a target='_blank' href={'https://www.waze.com/live-map/directions?navigate=yes&to=ll.' + curr.latLng.lat + '%2C' + curr.latLng.lng}>
                                     <img className='logo' src={require('./Images/waze.png')} />
                                 </a>
-                                <a href={'https://maps.google.com/?ll=' + curr.latLng.lat + ',' + curr.latLng.lng}>
+                                <a target='_blank' href={'https://maps.google.com/?ll=' + curr.latLng.lat + ',' + curr.latLng.lng}>
                                     <img className='logo' src={require('./Images/google-maps.png')} />
                                 </a>
-                                <a href={'http://maps.apple.com/?ll=' + curr.latLng.lat + ',' + curr.latLng.lng}>
+                                <a target='_blank' href={'http://maps.apple.com/?ll=' + curr.latLng.lat + ',' + curr.latLng.lng}>
                                     <img className='logo' src={require('./Images/apple.png')} />
+                                </a>
+                                <a>
+                                    <button onClick={() => removeAddress(curr.latLng)}>X</button>
                                 </a>
                             </div>
                         </div>

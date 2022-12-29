@@ -2,6 +2,7 @@ body {
   display: flex;
   justify-content: center;
   background: linear-gradient(0deg, #020a9b 0%, #5d72ff 100%);
+  font-family: Verdana, Tahoma, sans-serif;
 }
 
 .App {
@@ -59,6 +60,10 @@ input[type="text"] {
 
 .textbox::placeholder {
   color: white;
+}
+
+input:focus-visible {
+  outline: none;
 }
 
 .btn {
