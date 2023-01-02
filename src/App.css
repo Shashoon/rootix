@@ -1,11 +1,12 @@
+@import url('https://fonts.cdnfonts.com/css/circular-std');
+
 body {
   display: flex;
   justify-content: center;
   background: linear-gradient(0deg, #020a9b 0%, #5d72ff 100%);
-  font-family: Verdana, Tahoma, sans-serif;
+  font-family: 'Circular Std' , sans-serif;
   margin: 0;
 }
-
 .App {
   height: 100vh;
 }
@@ -23,21 +24,21 @@ body {
 
 .main {
   display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    height: 40%;
-    background: rgb(0 0 0 / 77%);
-    box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    border-top-right-radius: 80px;
-    border-top-left-radius: 80px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    color: #e3e3e3;
-    position: absolute;
-    bottom: 0;
-    overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 45%;
+  background: rgb(0 0 0 / 77%);
+  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-top-right-radius: 80px;
+  border-top-left-radius: 80px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #e3e3e3;
+  position: fixed;
+  bottom: 0;
+  overflow: hidden;
 }
 
 .main:hover {
@@ -46,16 +47,27 @@ body {
 
 form {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  width: 80%;
-  padding-top: 60px;
+  width: 90%;
+  padding-top: 40px;
+}
+
+.inputs-deck {
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 10px;
 }
 
 .textbox {
   border: none;
-  font-size: 20px;
+  font-size: 18px;
   padding: 5px 10px;
-  width: 75%;
+  width: 85%;
+  background-color: rgb(255 255 255 / 28%);
+  border-radius: 15px;
+  color: #e3e3e3;
 }
 
 input[type="text"] {
@@ -78,14 +90,14 @@ input:focus-visible {
 }
 
 .btn {
-  border-radius: 10px;
-  font-size: 20px;
-  padding: 1px 15px;
+  border-radius: 20px;
+  font-size: 18px;
+  padding: 3px 15px;
   margin-left: 10px;
   border: solid 1px #525252;
   background-color: darkorchid;
   color: #e3e3e3;
-}
+  }
 
 .btn:hover {
   cursor: pointer;
@@ -122,4 +134,12 @@ input:focus-visible {
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.2);
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+@media only screen and (max-width: 768px) {
+  
 }
