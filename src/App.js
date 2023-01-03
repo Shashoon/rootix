@@ -1,11 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
-import tt from '@tomtom-international/web-sdk-maps';
-import ttapi from '@tomtom-international/web-sdk-services';
-import './App.css';
-import '@tomtom-international/web-sdk-maps/dist/maps.css';
-import List from './List';
-import Map from './Map';
-import Navbar from './Navbar';
+import { useEffect, useRef, useState } from "react";
+import tt from "@tomtom-international/web-sdk-maps";
+import ttapi from "@tomtom-international/web-sdk-services";
+import "./App.css";
+import "@tomtom-international/web-sdk-maps/dist/maps.css";
+import List from "./List";
+import Map from "./Map";
+import Navbar from "./Navbar";
+import Search from "./Search";
 
 const App = () => {
   const [map, setMap] = useState({});
@@ -15,41 +16,46 @@ const App = () => {
   const [addresses, setAddresses] = useState([]);
   const origin = {
     lng: longitude,
-    lat: latitude
-  }
-
+    lat: latitude,
+  };
 
   /// Set map and handle map dragging
   useEffect(() => {
+    const currentLocation = navigator.geolocation.getCurrentPosition((position) => {
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
+    })
+
     const map = tt.map({
-      key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
-      container: 'mapElement',
+      key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
+      container: "mapElement",
       center: [longitude, latitude],
       stylesVisibility: {
         trafficIncidents: true,
-        trafficFlow: true
+        trafficFlow: true,
       },
-      zoom: 14
+      zoom: 14,
     });
+
 
     setMap(map);
 
     const addMarker = () => {
-      const popupOffset = { bottom: [0, -25] }
+      const popupOffset = { bottom: [0, -25] };
 
       const popup = new tt.Popup({
-        offset: popupOffset
-      }).setHTML('This is You!')
+        offset: popupOffset,
+      }).setHTML("This is You!");
 
-      const element = document.createElement('div');
-      element.className = 'marker';
+      const element = document.createElement("div");
+      element.className = "marker";
 
       const marker = new tt.Marker({
         draggable: true,
         element: element,
-      }).setLngLat(
-        [longitude, latitude]
-      ).addTo(map);
+      })
+        .setLngLat([longitude, latitude])
+        .addTo(map);
 
       /*marker.on('dragend', () => {
         const lngLat = marker.getLngLat();
@@ -58,12 +64,11 @@ const App = () => {
       })*/
 
       marker.setPopup(popup).togglePopup();
-    }
+    };
 
     addMarker();
 
-    return () => map.remove()
-
+    return () => map.remove();
   }, [longitude, latitude]);
 
   useEffect(() => {
@@ -74,14 +79,16 @@ const App = () => {
   const recalculateRoutes = () => {
     console.log('try')
     sortAddresses().then((res) => {
-
       setAddresses(res);
 
       const locations = res.map((curr) => {
         return curr.latLng;
-      })
+      });
 
-      locations.unshift(origin);
+      locations.unshift({
+        lng: longitude,
+        lat: latitude
+      });
 
       ttapi.services.calculateRoute({
         key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
@@ -95,32 +102,35 @@ const App = () => {
 
   const addDest = async (event) => {
     event.preventDefault();
-
-    let inputAddress = event.target[0].value;
-    let call = await fetch('https://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=' + inputAddress)
+    let inputAddress = event.target[1].value + ', ' + event.target[0].value;
+    let call = await fetch(
+      "http://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=" +
+      inputAddress
+    );
     let res = await call.json();
 
     const address = {
       name: inputAddress,
-      latLng: res.results[0].locations[0].latLng
+      latLng: res.results[0].locations[0].latLng,
     };
 
-    setDestinations(prev => [...prev, address]);
+    setDestinations((prev) => [...prev, address]);
     addDeliveryMarker(address.latLng, map);
-  }
+
+  };
 
   const drawRoute = (geoJson, map) => {
-    if (map.getLayer('route')) {
-      map.removeLayer('route');
-      map.removeSource('route')
+    if (map.getLayer("route")) {
+      map.removeLayer("route");
+      map.removeSource("route");
     }
 
     map.addLayer({
-      id: 'route',
-      type: 'line',
+      id: "route",
+      type: "line",
       source: {
-        type: 'geojson',
-        data: geoJson
+        type: "geojson",
+        data: geoJson,
       },
       paint: {
         'line-color': 'dodgerblue',
@@ -133,30 +143,33 @@ const App = () => {
     return {
       point: {
         latitude: lngLat.lat,
-        longitude: lngLat.lng
-      }
-    }
-  }
+        longitude: lngLat.lng,
+      },
+    };
+  };
 
   const addDeliveryMarker = (lngLat, map) => {
-    const element = document.createElement('div');
-    element.className = 'marker-delivery';
+    const element = document.createElement("div");
+    element.className = "marker-delivery";
+    element.id = lngLat.lat + ',' + lngLat.lng;
 
     new tt.Marker({
-      element: element
-    }).setLngLat(lngLat).addTo(map);
-  }
+      element: element,
+    })
+      .setLngLat(lngLat)
+      .addTo(map);
+  };
 
   const sortAddresses = () => {
     const pointsForDestinations = destinations.map((curr) => {
-      return convertToPoints(curr.latLng)
-    })
+      return convertToPoints(curr.latLng);
+    });
 
     const callParameters = {
-      key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
+      key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
       destinations: pointsForDestinations,
-      origins: [convertToPoints(origin)]
-    }
+      origins: [convertToPoints(origin)],
+    };
 
     return new Promise((resolve, reject) => {
       ttapi.services.matrixRouting(callParameters)
@@ -178,12 +191,41 @@ const App = () => {
 
           const sortedLocations = resultsArray.map((result) => {
             return result.location;
-          })
+          });
 
           setAddresses(resultsArray);
           resolve(resultsArray);
-        })
-    })
+        });
+    });
+  };
+
+  const removeAddress = (latLng) => {
+    const tempDest = [...destinations].filter((curr) => {
+      return curr.latLng.lat !== latLng.lat && curr.latLng.lng !== latLng.lng;
+    });
+
+    const tempAddresses = [...addresses].filter((curr) => {
+      return curr.latLng.lat !== latLng.lat && curr.latLng.lng !== latLng.lng;
+    });
+
+    setDestinations(tempDest);
+    setAddresses(tempAddresses);
+
+    if (tempDest.length === 0) {
+      removeMarker(latLng);
+    }
+
+  };
+
+  const removeMarker = (latLng) => {
+    const element = document.getElementById(latLng.lat + ',' + latLng.lng);
+    element?.remove();
+
+    if (map.getLayer("route")) {
+      map.removeLayer("route");
+      map.removeSource("route");
+    }
+
   }
 
   const handleVisitedAddress = (index) => {
@@ -211,28 +253,26 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
-      {map &&
-        (<div className="App">
+      {map && (
+        <div className="App">
           <Map />
-          <div className='background'>
-            <div className='main'>
-              <h1>Where to ?</h1>
-              <form onSubmit={e => addDest(e)}>
-                <input className='textbox' type='text' />
-                <input className='btn' type='submit' value={'Search'} />
-              </form>
+          <Navbar />
+          <div className="background">
+            <div className="main">
+
+              <Search addDest={addDest} />
               {
-                addresses && <List addresses={addresses} handleVisitedAddress={handleVisitedAddress} />
+                addresses &&
+                <List addresses={addresses}
+                  handleVisitedAddress={handleVisitedAddress}
+                  removeAddress={removeAddress} />
               }
             </div>
           </div>
         </div>
-        )
-      }
+      )}
     </>
-
   );
-}
+};
 
 export default App;
