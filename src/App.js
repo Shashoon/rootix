@@ -97,7 +97,7 @@ const App = () => {
     event.preventDefault();
 
     let inputAddress = event.target[0].value;
-    let call = await fetch('http://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=' + inputAddress)
+    let call = await fetch('https://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=' + inputAddress)
     let res = await call.json();
 
     const address = {
