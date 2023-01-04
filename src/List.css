@@ -23,7 +23,7 @@
 
 .address {
   display: grid;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 10% 70% 20%;
   justify-items: center;
   align-items: center;
   padding: 7px;
@@ -41,6 +41,10 @@
   color: #cecece;
 }
 
+.navigate-deck {
+  width: 100%;
+}
+
 .navigate {
   display: flex;
   justify-content: space-evenly;
@@ -53,15 +57,16 @@
   align-items: center;
 }
 
+.nav-btn {
+  display: none;
+}
+
 .logo {
   width: 22px;
   height: 22px;
 }
 
 .checkbox {
-  position: absolute;
-  left: 4px;
-  top: 4px;
 }
 
 [type="checkbox"] {
@@ -119,8 +124,16 @@
 }
 
 @media only screen and (max-width: 768px) {
- .checkbox {
-  left: 4px;
-  top: 4px;
- } 
+  .checkbox {
+    left: 4px;
+    top: 4px;
+  }
+
+  .nav-btn {
+    display: block;
+  }
+
+  .navigate {
+    display: none;
+  }
 }

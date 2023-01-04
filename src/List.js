@@ -5,11 +5,6 @@ import "./List.css";
 const List = ({ addresses, handleVisitedAddress, removeAddress }) => {
   return (
     <div className="list">
-      <div className="header">
-        <div>Stop No.</div>
-        <div>Address</div>
-        <div>Navigate</div>
-      </div>
       {addresses.map((curr, _index) => {
         return (
           <div key={_index} className="address" id={_index}>
@@ -27,60 +22,23 @@ const List = ({ addresses, handleVisitedAddress, removeAddress }) => {
                 {" (" + Math.floor(curr.drivingTime / 60) + " min)"}
               </a>
             </div>
-            <div className="navigate">
-              <a
-                target="_blank"
-                href={
-                  "https://www.waze.com/live-map/directions?navigate=yes&to=ll." +
-                  curr.latLng.lat +
-                  "%2C" +
-                  curr.latLng.lng
-                }
-              >
-                <img className="logo" src={require("./Images/waze.png")} />
-              </a>
-              <a
-                target="_blank"
-                href={
-                  "https://maps.google.com/?ll=" +
-                  curr.latLng.lat +
-                  "," +
-                  curr.latLng.lng
-                }
-              >
-                <img
-                  className="logo"
-                  src={require("./Images/google-maps.png")}
-                />
-              </a>
-              <a
-                target="_blank"
-                href={
-                  "http://maps.apple.com/?ll=" +
-                  curr.latLng.lat +
-                  "," +
-                  curr.latLng.lng
-                }
-              >
-                <img className="logo" src={require("./Images/apple.png")} />
-              </a>
-              <a className="delete" onClick={() => removeAddress(curr.latLng)}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <polyline points="3 6 5 6 21 6"></polyline>
-                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                  <line x1="10" y1="11" x2="10" y2="17"></line>
-                  <line x1="14" y1="11" x2="14" y2="17"></line>
-                </svg>
+            <div className="navigate-deck">
+              <div className="navigate">
+                <a target="_blank" href={"https://www.waze.com/live-map/directions?navigate=yes&to=ll." + curr.latLng.lat + "%2C" + curr.latLng.lng}>
+                  <img className="logo" src={require("./Images/waze.png")} />
+                </a>
+                <a target="_blank" href={"https://maps.google.com/?ll=" + curr.latLng.lat + "," + curr.latLng.lng}>
+                  <img className="logo" src={require("./Images/google-maps.png")} />
+                </a>
+                <a target="_blank" href={"http://maps.apple.com/?ll=" + curr.latLng.lat + "," + curr.latLng.lng}>
+                  <img className="logo" src={require("./Images/apple.png")} />
+                </a>
+                <a className="delete" onClick={() => removeAddress(curr.latLng)}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ><polyline points="3 6 5 6 21 6"></polyline> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </a>
+              </div>
+              <a className="nav-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-three-dots" viewBox="0 0 22 22"><path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" /> </svg>
               </a>
             </div>
           </div>

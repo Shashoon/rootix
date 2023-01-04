@@ -25,11 +25,11 @@ const Search = ({ addDest }) => {
   const handleCitiesList = () => {
     fetch(
       "https://data.gov.il/api/3/action/datastore_search?resource_id=5c78e9fa-c2e2-4771-93ff-7f400a12f7ba&q=" +
-        cityInputValue
+      cityInputValue
     ).then((res) => {
       res.json().then((response) => {
         const list = response.result.records.map((curr) => curr.שם_ישוב);
-        console.log(response.result);
+
         setCitiesLit(list);
       });
     });
@@ -38,7 +38,7 @@ const Search = ({ addDest }) => {
   const handleAddresslist = () => {
     fetch(
       "https://data.gov.il/api/3/action/datastore_search?resource_id=a7296d1a-f8c9-4b70-96c2-6ebb4352f8e3&limit=3200&q=" +
-        cityInputValue
+      cityInputValue + '%2C' + addressInputValue
     ).then((res) => {
       res.json().then((response) => {
         const list = response.result.records.map((curr) => curr.שם_רחוב);
@@ -52,7 +52,7 @@ const Search = ({ addDest }) => {
       <h1>Where to ?</h1>
       <form onSubmit={(e) => addDest(e)}>
         <div className="inputs-deck">
-          <div>
+          <div className="form-input">
             <input
               className="textbox"
               list="cities-data"
@@ -67,7 +67,7 @@ const Search = ({ addDest }) => {
               ))}
             </datalist>
           </div>
-          <div>
+          <div className="form-input">
             <input
               className="textbox"
               list="addresses-data"

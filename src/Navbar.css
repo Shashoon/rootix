@@ -4,27 +4,20 @@
   justify-content: space-between;
   align-items: center;
   color: white;
-  font-size: 2em;
-  padding: 10px;
   position: absolute;
-  width: 98.3%;
+  width: 100%;
   top: 0;
   background: rgb(0 0 0 / 77%);
 }
 
-.navbar .btn {
-  background-color: transparent;
-  color: white;
-  border: solid 1px white;
-  border-radius: 15px;
-  font-size: 15px;
-  padding: 3px 20px;
+.navbar .title {
+  margin-left: 4vw;
+  font-size: 5vw;
+  font-weight: 600;
 }
 
-.navbar .btn:hover {
-  cursor: pointer;
-  background-color: darkorchid;
-  color: white;
+.navbar .btn {
+  margin-right: 40px;
 }
 
 .modal {
@@ -54,11 +47,17 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .navbar {
-    width: 98%;
-  }
-  
   .modal {
     height: 35vh;
+  }
+
+  .navbar .title {
+    font-size: 10vw;
+  }
+
+  .navbar .btn {
+    margin-right: 10px;
+    font-size: 15px;
+    padding: 3px 16px;
   }
 }

@@ -12,7 +12,7 @@ const Navbar = () => {
     return (
         <>
             <div className="navbar">
-                <div>
+                <div className='title'>
                     Rootix
                 </div>
                 <button className='btn' onClick={toggleHelp}>Help</button>

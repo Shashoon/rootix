@@ -1,14 +1,15 @@
-@import url("https://fonts.cdnfonts.com/css/circular-std");
+@import url("https://fonts.googleapis.com/css?family=Varela Round");
 
 body {
   display: flex;
   justify-content: center;
   background: linear-gradient(0deg, #020a9b 0%, #5d72ff 100%);
-  font-family: "Circular Std", sans-serif;
+
   margin: 0;
 }
 .App {
   height: 100vh;
+  font-family: "Varel Round", sans-serif;
 }
 
 .map {
@@ -27,11 +28,11 @@ body {
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 45%;
-  background: rgb(0 0 0 / 77%);
-  box-shadow: 0 8px 32px 0 rgb(31 38 135 / 37%);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
+  height: 35%;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(7px);
+  backdrop-filter: blur(7px);
+  border: 1px solid rgba(0, 0, 0, 0.25);
   border-top-right-radius: 80px;
   border-top-left-radius: 80px;
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -57,17 +58,24 @@ form {
 .inputs-deck {
   display: flex;
   flex-direction: row;
-  padding-bottom: 10px;
+  justify-content: space-evenly;
+  width: 100%;
+  padding-bottom: 20px;
+}
+
+.form-input {
+  width: 360px;
 }
 
 .textbox {
   border: none;
-  font-size: 18px;
-  padding: 5px 10px;
+  font-size: 20px;
+  padding: 8px 15px;
   width: 85%;
   background-color: rgb(255 255 255 / 28%);
   border-radius: 15px;
   color: #e3e3e3;
+  box-shadow: 0 0.7em 1.5em -0.5em #8d8d8dbe;
 }
 
 input[type="text"] {
@@ -90,13 +98,23 @@ input:focus-visible {
 }
 
 .btn {
-  border-radius: 20px;
-  font-size: 18px;
-  padding: 3px 15px;
-  margin-left: 10px;
-  border: solid 1px #525252;
-  background-color: darkorchid;
-  color: #e3e3e3;
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 8px 25px;
+  color: white;
+  background: #ad5389;
+  background: linear-gradient(
+    0deg,
+    rgba(77, 54, 208, 1) 0%,
+    rgba(132, 116, 254, 1) 100%
+  );
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
+  letter-spacing: 0.05em;
+  border-radius: 20em;
 }
 
 .btn:hover {
@@ -141,4 +159,11 @@ input::-webkit-calendar-picker-indicator {
 }
 
 @media only screen and (max-width: 768px) {
+  .inputs-deck {
+    flex-direction: column;
+  }
+
+  .form-input {
+    padding-top: 10px;
+  }
 }

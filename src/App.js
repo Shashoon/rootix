@@ -34,14 +34,13 @@ const App = () => {
         trafficIncidents: true,
         trafficFlow: true,
       },
-      zoom: 14,
+      zoom: 16,
     });
-
 
     setMap(map);
 
     const addMarker = () => {
-      const popupOffset = { bottom: [0, -25] };
+      const popupOffset = { bottom: [0, -30] };
 
       const popup = new tt.Popup({
         offset: popupOffset,
