@@ -3,10 +3,13 @@ import tt from "@tomtom-international/web-sdk-maps";
 import ttapi from "@tomtom-international/web-sdk-services";
 import "./App.css";
 import "@tomtom-international/web-sdk-maps/dist/maps.css";
-import List from "./List";
-import Map from "./Map";
-import Navbar from "./Navbar";
-import Search from "./Search";
+import List from "./components/List";
+import Map from "./components/Map";
+import Navbar from "./components/Navbar";
+import Search from "./components/Search";
+import SearchBar from "./components/SearchBar";
+import Footer from "./components/Footer";
+import Gallery from "./components/Gallery";
 
 const App = () => {
   const [map, setMap] = useState({});
@@ -256,18 +259,9 @@ const App = () => {
         <div className="App">
           <Map />
           <Navbar />
-          <div className="background">
-            <div className="main">
-
-              <Search addDest={addDest} />
-              {
-                addresses &&
-                <List addresses={addresses}
-                  handleVisitedAddress={handleVisitedAddress}
-                  removeAddress={removeAddress} />
-              }
-            </div>
-          </div>
+          <SearchBar />
+          <Gallery />
+          <Footer />
         </div>
       )}
     </>
@@ -275,3 +269,16 @@ const App = () => {
 };
 
 export default App;
+
+/*<div className="background">
+  <div className="main">
+
+    <Search addDest={addDest} />
+    {
+      addresses &&
+      <List addresses={addresses}
+        handleVisitedAddress={handleVisitedAddress}
+        removeAddress={removeAddress} />
+    }
+  </div>
+</div>*/

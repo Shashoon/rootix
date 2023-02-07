@@ -1,6 +1,6 @@
-import './Navbar.css'
+import '../styles/Navbar.css'
 
-const Help = ({toggleHelp}) => {
+const Help = ({ toggleHelp }) => {
 
 
     return (

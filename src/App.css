@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Varela Round");
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Titillium+Web:wght@300;600;700&display=swap');
 
 body {
   display: flex;
@@ -7,9 +7,12 @@ body {
 
   margin: 0;
 }
+
 .App {
   height: 100vh;
-  font-family: "Varel Round", sans-serif;
+  font-family: 'Titillium Web', sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
 .map {
@@ -106,11 +109,9 @@ input:focus-visible {
   padding: 8px 25px;
   color: white;
   background: #ad5389;
-  background: linear-gradient(
-    0deg,
-    rgba(77, 54, 208, 1) 0%,
-    rgba(132, 116, 254, 1) 100%
-  );
+  background: linear-gradient(0deg,
+      rgba(77, 54, 208, 1) 0%,
+      rgba(132, 116, 254, 1) 100%);
   border: none;
   box-shadow: 0 0.7em 1.5em -0.5em #4d36d0be;
   letter-spacing: 0.05em;
@@ -119,6 +120,7 @@ input:focus-visible {
 
 .btn:hover {
   cursor: pointer;
+  background-color: #6c59ea;
 }
 
 .marker {
@@ -135,7 +137,7 @@ input:focus-visible {
   width: 45px;
   height: 45px;
   border-radius: 15px;
-  background-image: url("./Images/marker.png");
+  background-image: url("./images/marker.png");
   background-size: cover;
 }
 

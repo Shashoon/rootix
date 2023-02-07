@@ -1,13 +1,18 @@
 .navbar {
   height: 7%;
+  width: 85%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: white;
-  position: absolute;
-  width: 100%;
+  color: #414c56;
+  position: fixed;
   top: 0;
-  background: rgb(0 0 0 / 77%);
+  margin-top: .5rem;
+  padding: .5rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(2px);
+  background-color: rgb(240 240 240 / 77%);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .navbar .title {
@@ -18,6 +23,15 @@
 
 .navbar .btn {
   margin-right: 40px;
+  font-size: 1rem;
+}
+
+.navbar .btn:hover {
+  background: #eeeeee;
+  color: #6c59ea;
+  font-weight: 600;
+  border: 2px solid #6c59ea85;
+  ;
 }
 
 .modal {

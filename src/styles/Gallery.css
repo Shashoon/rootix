@@ -1,0 +1,38 @@
+.gallery {
+    height: 18%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #414c56;
+    position: fixed;
+    bottom: 10%;
+    padding-left: 2rem;
+    margin-bottom: 0.5rem;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.address-box {
+    width: 25%;
+    height: 85%;
+    background-color: #ffffffd4;
+    border-radius: 1rem;
+}
+
+.location {
+    display: flex;
+    align-items: flex-end;
+}
+
+.location h1 {
+    margin: 0;
+    font-size: 1rem;
+    font-size: 700;
+}
+
+.location img {
+    width: 2rem;
+    height: 2rem;
+}
