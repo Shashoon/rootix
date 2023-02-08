@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../styles/List.css";
 
 const List = ({ addresses, handleVisitedAddress, removeAddress }) => {
+
   return (
     <div className="list">
       {addresses.map((curr, _index) => {

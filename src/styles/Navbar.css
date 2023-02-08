@@ -1,6 +1,6 @@
 .navbar {
   height: 7%;
-  width: 85%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -17,12 +17,12 @@
 
 .navbar .title {
   margin-left: 4vw;
-  font-size: 5vw;
+  font-size: 2rem;
   font-weight: 600;
 }
 
 .navbar .btn {
-  margin-right: 40px;
+  margin-right: 1rem;
   font-size: 1rem;
 }
 
@@ -31,7 +31,6 @@
   color: #6c59ea;
   font-weight: 600;
   border: 2px solid #6c59ea85;
-  ;
 }
 
 .modal {

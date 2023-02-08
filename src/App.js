@@ -102,9 +102,7 @@ const App = () => {
     })
   }
 
-  const addDest = async (event) => {
-    event.preventDefault();
-    let inputAddress = event.target[1].value + ', ' + event.target[0].value;
+  const addDest = async (inputAddress) => {
     let call = await fetch(
       "http://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=" +
       inputAddress
@@ -118,7 +116,6 @@ const App = () => {
 
     setDestinations((prev) => [...prev, address]);
     addDeliveryMarker(address.latLng, map);
-
   };
 
   const drawRoute = (geoJson, map) => {
@@ -154,7 +151,7 @@ const App = () => {
     const element = document.createElement("div");
     element.className = "marker-delivery";
     element.id = lngLat.lat + ',' + lngLat.lng;
-
+    console.log(destinations);
     new tt.Marker({
       element: element,
     })
@@ -259,8 +256,10 @@ const App = () => {
         <div className="App">
           <Map />
           <Navbar />
-          <SearchBar />
-          <Gallery />
+          <SearchBar addDest={addDest} />
+          {addresses.length > 0 &&
+            <Gallery addresses={addresses} removeAddress={removeAddress} />
+          }
           <Footer />
         </div>
       )}

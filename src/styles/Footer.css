@@ -1,18 +1,27 @@
 .footer {
     height: 7%;
-    width: 100%;
+    width: 90%;
+    border-radius: 2rem;
     display: flex;
     justify-content: space-around;
     align-items: center;
     color: #414c56;
     position: fixed;
-    bottom: 0;
+    bottom: 0.5rem;
     padding: 0.5rem;
     -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
     background-color: rgb(240 240 240 / 77%);
     box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
     z-index: 10;
+}
+
+.footer div:hover {
+    cursor: pointer;
+}
+
+.active {
+    color: #6c59ea !important;
 }
 
 .icon-container {
