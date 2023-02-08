@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/rootix/static/css/main.1d49b9c9.css",
-    "main.js": "/rootix/static/js/main.c48c40c3.js",
+    "main.css": "/rootix/static/css/main.2269b22e.css",
+    "main.js": "/rootix/static/js/main.220893e9.js",
     "static/media/apple.png": "/rootix/static/media/apple.d49c752d65a8fbd820e8.png",
     "static/media/waze.png": "/rootix/static/media/waze.41629801fb8ab871d30a.png",
     "static/media/google-maps.png": "/rootix/static/media/google-maps.c31a78171b7e5c196cac.png",
     "static/media/marker.png": "/rootix/static/media/marker.abf0fdd58616d801b5c9.png",
     "index.html": "/rootix/index.html",
-    "main.1d49b9c9.css.map": "/rootix/static/css/main.1d49b9c9.css.map",
-    "main.c48c40c3.js.map": "/rootix/static/js/main.c48c40c3.js.map"
+    "main.2269b22e.css.map": "/rootix/static/css/main.2269b22e.css.map",
+    "main.220893e9.js.map": "/rootix/static/js/main.220893e9.js.map"
   },
   "entrypoints": [
-    "static/css/main.1d49b9c9.css",
-    "static/js/main.c48c40c3.js"
+    "static/css/main.2269b22e.css",
+    "static/js/main.220893e9.js"
   ]
 }
