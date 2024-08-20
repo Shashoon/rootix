@@ -1,48 +1,56 @@
 .footer {
-    height: 7%;
-    width: 90%;
-    border-radius: 2rem;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    color: #414c56;
-    position: fixed;
-    bottom: 0.5rem;
-    padding: 0.5rem;
-    -webkit-backdrop-filter: blur(2px);
-    backdrop-filter: blur(2px);
-    background-color: rgb(240 240 240 / 77%);
-    box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-    z-index: 10;
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #414c56;
+  position: fixed;
+  bottom: 0;
+  padding: 0.5rem;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  background-color: rgb(240 240 240 / 77%);
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+  z-index: 10;
 }
 
 .footer div:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .active {
-    color: #6c59ea !important;
+  color: #6c59ea !important;
 }
 
 .icon-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: 600;
 }
 
 .icon-container p {
-    display: block;
-    margin: 0;
+  display: block;
+  margin: 0;
 }
 
 .centered-button {
-    border: 1px solid #ccc;
-    border-radius: 125px;
-    box-shadow: inset 0 13px 25px rgb(255 255 255 / 50%), 0 3px 5px rgb(0 0 0 / 20%), 0 10px 13px rgb(0 0 0 / 10%);
-    font-size: 2rem;
-    padding: 0.5rem;
-    background-color: #6c59ea;
-    color: #424242;
-    cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 125px;
+  box-shadow: inset 0 13px 25px rgb(255 255 255 / 50%),
+    0 3px 5px rgb(0 0 0 / 20%), 0 10px 13px rgb(0 0 0 / 10%);
+  font-size: 2rem;
+  padding: 0.5rem;
+  background-color: #6c59ea;
+  color: #424242;
+  cursor: pointer;
+}
+
+.centered-button:hover {
+  background: rgb(255 255 255 / 50%);
+  color: #6c59ea;
+  font-weight: 600;
+  border: 2px solid #6c59ea85;
+  cursor: pointer;
 }

@@ -1,11 +1,11 @@
-import '../styles/Navbar.css'
+import '../styles/Help.css';
 
 const Help = ({ toggleHelp }) => {
 
 
     return (
         <div className='modal'>
-            <h3>About Rootix</h3>
+            <h1>About Rootix</h1>
             <p>
                 Rootix is a website made to plan a route that goes through several destinations.
                 The algorithm knows to take care of - traffic loads, departure times, blocked roads and more, all in real time.

@@ -124,13 +124,11 @@ input:focus-visible {
 }
 
 .marker {
-  background-image: url("https://i.imgur.com/oz3r3Wq.png");
+  background-image: url(../src/images/marker.svg);
   background-size: cover;
-  width: 25px;
-  height: 25px;
-  background-color: yellow;
-  border-radius: 15px;
-  border: solid 2px darkslategray;
+  width: 36px;
+  height: 36px;
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
 }
 
 .marker-delivery {

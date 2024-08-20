@@ -24,10 +24,12 @@ const App = () => {
 
   /// Set map and handle map dragging
   useEffect(() => {
-    const currentLocation = navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    })
+    const currentLocation = navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      }
+    );
 
     const map = tt.map({
       key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
@@ -37,13 +39,13 @@ const App = () => {
         trafficIncidents: true,
         trafficFlow: true,
       },
-      zoom: 16,
+      zoom: 13,
     });
 
     setMap(map);
 
     const addMarker = () => {
-      const popupOffset = { bottom: [0, -30] };
+      const popupOffset = { bottom: [0, -36] };
 
       const popup = new tt.Popup({
         offset: popupOffset,
@@ -74,12 +76,11 @@ const App = () => {
   }, [longitude, latitude]);
 
   useEffect(() => {
-    if (destinations.length >= 1)
-      recalculateRoutes();
-  }, [destinations])
+    if (destinations.length >= 1) recalculateRoutes();
+  }, [destinations]);
 
   const recalculateRoutes = () => {
-    console.log('try')
+    console.log("try");
     sortAddresses().then((res) => {
       setAddresses(res);
 
@@ -89,33 +90,45 @@ const App = () => {
 
       locations.unshift({
         lng: longitude,
-        lat: latitude
+        lat: latitude,
       });
 
-      ttapi.services.calculateRoute({
-        key: 'GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT',
-        locations: locations
-      }).then((routeData) => {
-        const geoJson = routeData.toGeoJson();
-        drawRoute(geoJson, map)
-      })
-    })
-  }
+      ttapi.services
+        .calculateRoute({
+          key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
+          locations: locations,
+        })
+        .then((routeData) => {
+          const geoJson = routeData.toGeoJson();
+          drawRoute(geoJson, map);
+        });
+    });
+  };
 
   const addDest = async (inputAddress) => {
-    let call = await fetch(
-      "http://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=" +
-      inputAddress
-    );
-    let res = await call.json();
+    // let call = await fetch(
+    //   "http://www.mapquestapi.com/geocoding/v1/address?key=cnU92uvDR2KXPibdVGb7aGVYPikbqnV4&location=" +
+    //     inputAddress
+    // );
 
-    const address = {
-      name: inputAddress,
-      latLng: res.results[0].locations[0].latLng,
-    };
+    let call = await ttapi.services
+      .geocode({
+        key: "GTJ7RFG5DS8CVoFHKyGsvmoys35G6KMT",
+        query: inputAddress,
+      })
+      .then((res, err) => {
+        if (err) return console.log(err);
 
-    setDestinations((prev) => [...prev, address]);
-    addDeliveryMarker(address.latLng, map);
+        const address = {
+          name: inputAddress,
+          latLng: res.results[0].position,
+        };
+
+        setDestinations((prev) => [...prev, address]);
+        addDeliveryMarker(address.latLng, map);
+      });
+
+    // let res = await call;
   };
 
   const drawRoute = (geoJson, map) => {
@@ -132,11 +145,11 @@ const App = () => {
         data: geoJson,
       },
       paint: {
-        'line-color': 'dodgerblue',
-        'line-width': 5
-      }
-    })
-  }
+        "line-color": "dodgerblue",
+        "line-width": 5,
+      },
+    });
+  };
 
   const convertToPoints = (lngLat) => {
     return {
@@ -150,7 +163,7 @@ const App = () => {
   const addDeliveryMarker = (lngLat, map) => {
     const element = document.createElement("div");
     element.className = "marker-delivery";
-    element.id = lngLat.lat + ',' + lngLat.lng;
+    element.id = lngLat.lat + "," + lngLat.lng;
     console.log(destinations);
     new tt.Marker({
       element: element,
@@ -171,30 +184,28 @@ const App = () => {
     };
 
     return new Promise((resolve, reject) => {
-      ttapi.services.matrixRouting(callParameters)
-        .then((matrixAPIResults) => {
-          const results = matrixAPIResults.matrix[0];
-          const resultsArray = results.map((result, index) => {
-            return {
-              name: destinations[index].name,
-              latLng: destinations[index].latLng,
-              drivingTime: result.response.routeSummary.travelTimeInSeconds,
-              isVisited: false
-            }
-          })
-
-
-          resultsArray.sort((a, b) => {
-            return a.drivingTime - b.drivingTime;
-          })
-
-          const sortedLocations = resultsArray.map((result) => {
-            return result.location;
-          });
-
-          setAddresses(resultsArray);
-          resolve(resultsArray);
+      ttapi.services.matrixRouting(callParameters).then((matrixAPIResults) => {
+        const results = matrixAPIResults.matrix[0];
+        const resultsArray = results.map((result, index) => {
+          return {
+            name: destinations[index].name,
+            latLng: destinations[index].latLng,
+            drivingTime: result.response.routeSummary.travelTimeInSeconds,
+            isVisited: false,
+          };
         });
+
+        resultsArray.sort((a, b) => {
+          return a.drivingTime - b.drivingTime;
+        });
+
+        const sortedLocations = resultsArray.map((result) => {
+          return result.location;
+        });
+
+        setAddresses(resultsArray);
+        resolve(resultsArray);
+      });
     });
   };
 
@@ -213,19 +224,17 @@ const App = () => {
     if (tempDest.length === 0) {
       removeMarker(latLng);
     }
-
   };
 
   const removeMarker = (latLng) => {
-    const element = document.getElementById(latLng.lat + ',' + latLng.lng);
+    const element = document.getElementById(latLng.lat + "," + latLng.lng);
     element?.remove();
 
     if (map.getLayer("route")) {
       map.removeLayer("route");
       map.removeSource("route");
     }
-
-  }
+  };
 
   const handleVisitedAddress = (index) => {
     const temp = [...addresses];
@@ -236,19 +245,16 @@ const App = () => {
       temp.push(temp.splice(index, 1)[0]);
     } else {
       temp.sort((a, b) => {
-        return a.drivingTime - b.drivingTime
-      })
+        return a.drivingTime - b.drivingTime;
+      });
 
       temp.map((curr, _index) => {
-        if (curr.isVisited)
-          temp.push(temp.splice(_index, 1)[0])
-      })
+        if (curr.isVisited) temp.push(temp.splice(_index, 1)[0]);
+      });
     }
 
-    setAddresses(temp)
-  }
-
-
+    setAddresses(temp);
+  };
 
   return (
     <>
@@ -257,9 +263,9 @@ const App = () => {
           <Map />
           <Navbar />
           <SearchBar addDest={addDest} />
-          {addresses.length > 0 &&
+          {addresses.length > 0 && (
             <Gallery addresses={addresses} removeAddress={removeAddress} />
-          }
+          )}
           <Footer />
         </div>
       )}
