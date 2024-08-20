@@ -8,9 +8,7 @@
   position: fixed;
   bottom: 0;
   padding: 0.5rem;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
-  background-color: rgb(240 240 240 / 77%);
+  background-color: rgb(240 240 240);
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
   z-index: 10;
 }
@@ -42,7 +40,6 @@
     0 3px 5px rgb(0 0 0 / 20%), 0 10px 13px rgb(0 0 0 / 10%);
   font-size: 2rem;
   padding: 0.5rem;
-  background-color: #6c59ea;
   color: #424242;
   cursor: pointer;
 }
